@@ -78,11 +78,20 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Create your figure" id="6fm-XO-spe">
-                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="7Gw-Sx-hYB">
-                            <connections>
-                                <action selector="resetList:" destination="yJT-ca-HJH" id="QFg-FN-HWl"/>
-                            </connections>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem systemItem="refresh" id="7Gw-Sx-hYB">
+                                <connections>
+                                    <action selector="resetList:" destination="yJT-ca-HJH" id="QFg-FN-HWl"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem style="plain" id="WSL-Bo-sEt">
+                                <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="hxI-9A-q22">
+                                    <rect key="frame" x="61" y="6.5" width="51" height="31"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="onTintColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </switch>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="play" id="xqr-4M-QJi">
                                 <connections>
@@ -96,6 +105,9 @@
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="typeSwitch" destination="hxI-9A-q22" id="aRt-oB-PaX"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JKS-pG-4Vz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -109,18 +121,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2FG-r8-uhd" customClass="FigureView" customModule="PracticeProject" customModuleProvider="target">
-                                <rect key="frame" x="20" y="113" width="374" height="725"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="148" translatesAutoresizingMaskIntoConstraints="NO" id="arc-0A-Qp6">
+                                <rect key="frame" x="10" y="98" width="394" height="754"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2FG-r8-uhd" customClass="FigureView" customModule="PracticeProject" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="303"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    </view>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="llV-TU-vDQ">
+                                        <rect key="frame" x="-2" y="451" width="398" height="304"/>
+                                        <connections>
+                                            <action selector="updateFV:" destination="jNC-zj-OkJ" eventType="valueChanged" id="noC-Wr-N1r"/>
+                                        </connections>
+                                    </slider>
+                                </subviews>
+                                <variation key="heightClass=regular-widthClass=compact" axis="vertical"/>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="lYR-7s-rg2" firstAttribute="bottom" secondItem="arc-0A-Qp6" secondAttribute="bottom" constant="10" id="OhK-sn-3YG"/>
+                            <constraint firstItem="arc-0A-Qp6" firstAttribute="leading" secondItem="lYR-7s-rg2" secondAttribute="leading" constant="10" id="Ryo-ni-N7V"/>
+                            <constraint firstAttribute="trailing" secondItem="arc-0A-Qp6" secondAttribute="trailing" constant="10" id="SUR-RI-1KJ"/>
+                            <constraint firstItem="arc-0A-Qp6" firstAttribute="top" secondItem="lYR-7s-rg2" secondAttribute="top" constant="10" id="bj1-0Q-r3R"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="lYR-7s-rg2"/>
                     </view>
                     <navigationItem key="navigationItem" id="NoG-gZ-vaQ"/>
                     <connections>
                         <outlet property="figure" destination="2FG-r8-uhd" id="F6F-tM-SFM"/>
+                        <outlet property="scaleSlider" destination="llV-TU-vDQ" id="obq-uN-eDQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o27-gG-ofC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

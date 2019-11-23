@@ -10,8 +10,9 @@ import UIKit
 
 class FigureViewController: UIViewController {
     
+    @IBOutlet weak var scaleSlider: UISlider!
     var items : [PracticeItem]?
-    
+    var type : Int?
     @IBOutlet weak var figure: FigureView!
     
     override func viewDidLoad() {
@@ -23,6 +24,10 @@ class FigureViewController: UIViewController {
             }
         }
         figure.points = points
+        figure.type = type!
+        if type == 0 {
+            scaleSlider.isHidden = true
+        }
         
         
         
@@ -37,14 +42,9 @@ class FigureViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func updateFV(_ sender: UISlider) {
+        figure.scale = CGFloat(sender.value)
+        figure.setNeedsDisplay()
     }
-    */
-
+    
 }
